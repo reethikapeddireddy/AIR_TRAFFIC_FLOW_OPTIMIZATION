@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Air Traffic Optimization</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #0b1e39;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: white;
+            color: black;
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #0b1e39;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 15px;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #777;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 25px;
+            padding: 12px;
+            background: #0b1e39;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #14345d;
+        }
+
+        .result {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: green;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Flight Route Optimization</h1>
+
+    <form action="/optimize" method="POST">
+
+        {% for field in fields %}
+            <label>{{ field.name }}</label>
+            <select name="{{ field.name }}" required>
+                <option value="">-- Select {{ field.name }} --</option>
+                {% for opt in field.options %}
+                    <option value="{{ opt }}">{{ opt }}</option>
+                {% endfor %}
+            </select>
+        {% endfor %}
+
+        <button type="submit">Optimize Route</button>
+    </form>
+
+    {% if result_text %}
+        <div class="result">{{ result_text }}</div>
+    {% endif %}
+
+</div>
+
+</body>
+</html>
